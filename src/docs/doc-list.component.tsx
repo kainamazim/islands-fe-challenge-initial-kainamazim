@@ -1,6 +1,9 @@
+import { useDocs } from "../hooks";
 import { Doc } from "./doc.component";
 
 export const DocList = () => {
+  const { data = [] } = useDocs();
+
   return (
     <table>
       <thead>
@@ -11,8 +14,9 @@ export const DocList = () => {
         </tr>
       </thead>
       <tbody>
-        <Doc data={{ id: "1", name: "Some Doc", status: "draft" }} />
-        <Doc data={{ id: "2", name: "Some Doc 2", status: "failed" }} />
+        {data.map((doc) => (
+          <Doc key={doc.id} data={doc} />
+        ))}
       </tbody>
     </table>
   );
